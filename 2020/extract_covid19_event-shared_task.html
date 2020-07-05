@@ -112,25 +112,24 @@
 
         <h4>Get dataset </h4>
 
-        <p>Due to Twitter's data sharing policy and people's privacy concerns, we are only able to release the tweet IDs. Participants could recover our annotated data by using official Twitter API, for example in the following way.</p>
+        <p>Due to Twitter's data sharing policy and people's privacy concerns, we are only able to release the tweet IDs. Participants could recover our annotated data by using official Twitter API. We provide a script for downloading tweets at: <a href="https://github.com/viczong/extract_COVID19_events_from_Twitter/blob/master/download_data.py">https://github.com/viczong/extract_COVID19_events_from_Twitter/blob/master/download_data.py</a>. Prepare your Twitter API keys and tokens and run </p>
 
         <pre><code>
-            import tweepy
-
-            auth = tweepy.OAuthHandler(your_API_key, your_API_secret_key)
-            auth.set_access_token(your_Access_token, your_Access_token_secret)
-
-            api = tweepy.API(auth, parser=tweepy.parsers.JSONParser(), wait_on_rate_limit=True)
-
-            a_single_tweet = api.get_status(id=id_for_tweet, tweet_mode='extended')
-            tweet_text_we_use = a_single_tweet['full_text']
+            python download_data.py --API_key your_API_key
+                                    --API_secret_key your_API_secret_key
+                                    --access_token your_access_token
+                                    --access_token_secret your_access_token_secret
         </code></pre>
 
-        <p>Based on our own trail for re-collecting tweets through official Twitter API, 7,115 out of 7,500 tweets could be obtained by using above code snippet (as of June 5, 2020).</p>
+        <p>The downloaded tweets will be under 'data' folder. Based on our own trail for re-collecting tweets through official Twitter API, 7,149 out of 7,500 tweets could be obtained (as of July 4, 2020).</p>
 
         <h4>Annotation format</h4>
 
-        <p>For each tweet, we provide character offsets for candidate chunks and annotations. Character offsets are calculated by using the 'full_text' field (as shown above in the code).</p>
+        <p>For each tweet, we provide character offsets for candidate chunks and annotations. Character offsets are calculated by using the 'full_text' field (as shown below).</p>
+        <pre><code>
+            a_single_tweet = api.get_status(id=id_for_tweet, tweet_mode='extended')
+            tweet_text_we_use = a_single_tweet['full_text']
+        </code></pre>
         <p>Our provided annotations are divided into two parts. For more details, please refer to Section 2 of our <a href="https://arxiv.org/pdf/2006.02567.pdf">paper</a>.</p>
 
         <ul>
@@ -141,7 +140,7 @@
 <a id="baseline"></a>
 <hr/>
 <h2 style="padding-top:50px; margin-top:-50px;">Baseline</h2>
-<p> We will provide a logistic regression baseline for this task.</p>
+<p> We provide a logistic regression baseline for this task at: <a href="https://github.com/viczong/extract_COVID19_events_from_Twitter/tree/master/shared_task">https://github.com/viczong/extract_COVID19_events_from_Twitter/tree/master/shared_task</a>.</p>
 
 
 <a id="submission"></a>
